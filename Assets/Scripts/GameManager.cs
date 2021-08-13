@@ -16,22 +16,26 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Transform[] innocentSpawnPoints;
 
     public int respawnNumber; // how many enemies to respawn
-    
+
+
+    private Player _player;
 
 
     private void Start()
     {
-        RespawnMonster();
+        RespawnPlayer();
         
         RespawnInnocents();
+        
+        
     }
 
-    private void RespawnMonster()
+    private void RespawnPlayer()
     {
-        Player player = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
-        player.GetComponent<Player>();
-        player.range = 5;
-        Debug.Log(player.range);
+        _player = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
+        _player.GetComponent<Player>();
+        _player.range = 5;
+        Debug.Log(_player.range);
     }
 
 
@@ -44,5 +48,7 @@ public class GameManager : MonoBehaviour
             innocent.GetComponent<Innocent>();
         }
     }
+    
+    
     
 }
