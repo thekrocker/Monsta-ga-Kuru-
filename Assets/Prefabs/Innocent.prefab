@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: -8719959286576565674}
   m_Layer: 0
   m_Name: Innocent
-  m_TagString: Untagged
+  m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -402,6 +402,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9e831bab0da1c94cb3f3754d0212b4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moving: 0
-  escapeArea: {fileID: 7188683841268451135, guid: 8884252b96436a24f840c355defbdc4f,
-    type: 3}
+  platform: {fileID: 0}

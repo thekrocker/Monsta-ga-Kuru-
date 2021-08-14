@@ -14,11 +14,15 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Innocent innocents;
     [SerializeField] private Transform[] innocentSpawnPoints;
+    
+
 
     public int respawnNumber; // how many enemies to respawn
 
 
     private Player _player;
+
+    public Platform platform;
 
 
     private void Start()
@@ -27,6 +31,7 @@ public class GameManager : MonoBehaviour
         
         RespawnInnocents();
         
+
         
     }
 
@@ -45,9 +50,13 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < respawnNumber; i++)
         {
             Innocent innocent = Instantiate(innocents, innocentSpawnPoints[i].position, Quaternion.identity);
-            innocent.GetComponent<Innocent>();
+            innocent.platform = this.platform;
         }
     }
+    
+    
+
+
     
     
     

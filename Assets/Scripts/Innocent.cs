@@ -5,53 +5,62 @@ using UnityEngine;
 
 public class Innocent : MonoBehaviour
 {
-     private Vector3 _dragOffset;
-     private bool _selected;
+    private Vector3 _dragOffset;
+    private bool _selected;
     private Camera _camera;
-    private float _startPosX, _startPosY;
-    public bool moving;
+    
+    public Platform platform;
 
 
 
-        private void Awake()
+    private void Awake()
     {
         _camera = Camera.main;
     }
 
+    private void Start()
+    {
+    }
 
-        private void Update()
+
+    private void Update()
+    {
+
+        if (_selected)
         {
-            if (_selected)
-            {
-                
-                // transform.position = new Vector2(GetMousePos().x, GetMousePos().y);
-                transform.position = GetMousePos() + _dragOffset;
-            }
             
-            
-
-            
+            // transform.position = new Vector2(GetMousePos().x, GetMousePos().y);
+            transform.position = GetMousePos() + _dragOffset;
         }
 
-        
-        private void OnMouseDown()
-        {
-
-            _dragOffset = transform.position - GetMousePos();
-            _selected = true;
-        }
-
-        private void OnMouseUp()
+        if (Input.GetMouseButtonUp(0) && platform.isInsidePlatform)
         {
             _selected = false;
         }
-
-
-        private Vector3 GetMousePos()
-        {
-            var mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0;
-            return mousePos;
-        }
+            
     }
+    private void OnMouseDown()
+    {
+        _dragOffset = transform.position - GetMousePos();
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _selected = true;
+        }
+            
+    }
+    
+
+    private Vector3 GetMousePos()
+    {
+        var mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0;
+        return mousePos;
+    }
+    
+    
+}
 
