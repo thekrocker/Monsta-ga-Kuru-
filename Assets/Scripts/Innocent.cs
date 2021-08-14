@@ -17,12 +17,22 @@ public class Innocent : MonoBehaviour
 
     private Vector3 _resetPosition;
 
+    public static List<Innocent> İnnocentList = new List<Innocent>();
+
+    public static List<Innocent> GetInnocentList()
+    {
+        return İnnocentList;
+    }
+
+    
 
     private void Awake()
     {
         _isInsidePlatform = false;
         _resetPosition = transform.position;
         _camera = Camera.main;
+        
+        İnnocentList.Add(this); // dont try to forget removing them after dying.. İnnocentList.Remove(this);
 
     }
 
@@ -46,6 +56,7 @@ public class Innocent : MonoBehaviour
 
     private void Update()
     {
+
 
         if (_selected)
         {

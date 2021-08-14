@@ -5,14 +5,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class TimerCountdown : MonoBehaviour
 {
+    
 
     public TextMeshProUGUI textDisplay;
-    public int secondsLeft = 30;
+    public int secondsLeft;
     public bool takingAway;
     public bool secondsExpired = false;
-
+    
+    
 
     private void Start()
     {        
@@ -50,7 +53,7 @@ public class TimerCountdown : MonoBehaviour
         takingAway = false;
     }
 
-    public bool AreSecondsExpired()
+    public bool SecondsExpired()
     {
         if (secondsLeft <= 0)
         {

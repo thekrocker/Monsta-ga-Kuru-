@@ -6,10 +6,13 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    
-    public int range;
-    private void Start()
+    public TimerCountdown timer;
+
+    private void Update()
     {
-        
+        if (timer.SecondsExpired())
+        {
+            Destroy(gameObject);
+        }
     }
 }
