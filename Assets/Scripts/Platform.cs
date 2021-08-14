@@ -7,9 +7,10 @@ public class Platform : MonoBehaviour
 {
 
 
-    public bool isInsidePlatform;
-   
     
+    
+    /*public bool isInsidePlatform;
+
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class Platform : MonoBehaviour
     public void OnTriggerEnter2D(Collider2D other)
     {
         isInsidePlatform = true;
+
         Debug.Log("First Script when triggered:" + isInsidePlatform);
 
     }
@@ -28,5 +30,5 @@ public class Platform : MonoBehaviour
     {
         isInsidePlatform = false;
         Debug.Log("Leaving" + other.gameObject.name);
-    }
+    }*/
 }

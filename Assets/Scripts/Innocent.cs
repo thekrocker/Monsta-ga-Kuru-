@@ -11,15 +11,36 @@ public class Innocent : MonoBehaviour
     
     public Platform platform;
 
+    private bool _isPlaced;
+
+    private bool _isInsidePlatform;
+
+    private Vector3 _resetPosition;
 
 
     private void Awake()
     {
+        _isInsidePlatform = false;
+        _resetPosition = transform.position;
         _camera = Camera.main;
+
     }
 
-    private void Start()
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.CompareTag("EscapePlatform"))
+        {
+            _isInsidePlatform = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("EscapePlatform"))
+        {
+            _isInsidePlatform = false;
+        }
     }
 
 
@@ -28,32 +49,44 @@ public class Innocent : MonoBehaviour
 
         if (_selected)
         {
-            
             // transform.position = new Vector2(GetMousePos().x, GetMousePos().y);
             transform.position = GetMousePos() + _dragOffset;
         }
-
-        if (Input.GetMouseButtonUp(0) && platform.isInsidePlatform)
-        {
-            _selected = false;
-        }
+        
+        
             
     }
+    private void OnMouseUp()
+    {
+        if (_isInsidePlatform) // Check if OnTriggerEnter2D is true.
+        {
+            _isPlaced = true;
+            _selected = false;
+        }
+        else
+        {
+            _selected = false;
+            this.transform.localPosition = new Vector3(_resetPosition.x, _resetPosition.y, _resetPosition.z);
+            
+        }
+
+
+    }
+
+
     private void OnMouseDown()
     {
-        _dragOffset = transform.position - GetMousePos();
+         _dragOffset = transform.position - GetMousePos();
     }
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !_isPlaced)
         {
             _selected = true;
         }
-            
     }
     
-
     private Vector3 GetMousePos()
     {
         var mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);

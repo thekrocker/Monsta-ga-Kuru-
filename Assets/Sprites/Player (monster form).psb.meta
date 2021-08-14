@@ -17,6 +17,21 @@ ScriptedImporter:
   - first:
       213: 3437838141119625822
     second: Player (monster form)_4
+  - first:
+      213: -5571157201576240318
+    second: Player (monster form)_0
+  - first:
+      213: -6880061316035394324
+    second: Player (monster form)_1
+  - first:
+      213: 7410499260232707290
+    second: Player (monster form)_2
+  - first:
+      213: 3032227296039561958
+    second: Player (monster form)_3
+  - first:
+      213: 3437838141119625822
+    second: Player (monster form)_4
   externalObjects: {}
   serializedVersion: 2
   userData: 
@@ -103,7 +118,7 @@ ScriptedImporter:
   mosaicSpriteImportData:
   - name: Player (monster form)_0
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -125,7 +140,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 1450}
   - name: Player (monster form)_1
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -147,7 +162,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 1334}
   - name: Player (monster form)_2
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -169,7 +184,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 1175}
   - name: Player (monster form)_3
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -191,7 +206,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 936}
   - name: Player (monster form)_4
     originalName: 
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0}
     alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
