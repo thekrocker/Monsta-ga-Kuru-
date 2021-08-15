@@ -15,13 +15,11 @@ public class GameManager : MonoBehaviour
     private Monster _monster;
     private bool _isMonsterSpawned;
     public TimerCountdown timer;
-    
-    
     [SerializeField] private Innocent innocents;
     [SerializeField] private Transform[] innocentSpawnPoints;
 
-
-
+    
+    
     
     private List<Innocent> _innocentList = new List<Innocent>();
 
@@ -80,11 +78,11 @@ public class GameManager : MonoBehaviour
 
     private void SpawnMonster()
     {
-        
         _monster = Instantiate(monsterPrefab, playerSpawnPoint.position, Quaternion.identity);
         _monster.GetComponent<Monster>();
-        
     }
+    
+    
     
     
 

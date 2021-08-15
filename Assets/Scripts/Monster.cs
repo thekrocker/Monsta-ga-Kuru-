@@ -10,8 +10,7 @@ public class Monster : MonoBehaviour
 {
 
     [SerializeField] private float range;
-
-
+    private WinLoseManager _winLoseManager;
     private Vector3 _a;
     private Vector3 _b;
     [SerializeField] private float speed;
@@ -26,7 +25,7 @@ public class Monster : MonoBehaviour
     private void Start()
     {
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        
+        _winLoseManager = GameObject.Find("WinLoseManager").GetComponent<WinLoseManager>();
         StartCoroutine(MoveCoroutine());
     }
 
@@ -95,12 +94,14 @@ public class Monster : MonoBehaviour
             if (allActive) // If you win.
             {
                 // win screen
-                Debug.Log("You win!");
+                _winLoseManager.OpenWinScreen();
+                
             }
 
             else
             {
-                Debug.Log("Game is Over");
+                _winLoseManager.OpenLoseScreen();
+
             }
 
         }
