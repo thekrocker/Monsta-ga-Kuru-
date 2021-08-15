@@ -1068,6 +1068,7 @@ MonoBehaviour:
   - {fileID: 475197867}
   respawnNumber: 6
   platform: {fileID: 1058440304}
+  innocent: {fileID: 0}
 --- !u!4 &2006524388
 Transform:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Innocent : MonoBehaviour
 {
+
+    public static Innocent Instance;
     private Vector3 _dragOffset;
     private bool _selected;
     private Camera _camera;
@@ -16,25 +18,33 @@ public class Innocent : MonoBehaviour
     private bool _isInsidePlatform;
 
     private Vector3 _resetPosition;
+    
+    GameManager _gameManager;
+    private TimerCountdown _timerCountdown;
 
-    public static List<Innocent> İnnocentList = new List<Innocent>();
-
-    public static List<Innocent> GetInnocentList()
-    {
-        return İnnocentList;
-    }
-
+    
     
 
     private void Awake()
     {
+        Instance = this;
+        
+        
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _timerCountdown = GameObject.Find("CountdownManager").GetComponent<TimerCountdown>();
+        
+        
         _isInsidePlatform = false;
+        
         _resetPosition = transform.position;
+        
         _camera = Camera.main;
         
-        İnnocentList.Add(this); // dont try to forget removing them after dying.. İnnocentList.Remove(this);
+        
 
     }
+    
+    
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -43,6 +53,8 @@ public class Innocent : MonoBehaviour
         {
             _isInsidePlatform = true;
         }
+        
+        
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -56,7 +68,6 @@ public class Innocent : MonoBehaviour
 
     private void Update()
     {
-
 
         if (_selected)
         {
@@ -73,12 +84,12 @@ public class Innocent : MonoBehaviour
         {
             _isPlaced = true;
             _selected = false;
+
         }
         else
         {
             _selected = false;
             this.transform.localPosition = new Vector3(_resetPosition.x, _resetPosition.y, _resetPosition.z);
-            
         }
 
 
@@ -92,7 +103,7 @@ public class Innocent : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0) && !_isPlaced)
+        if (Input.GetMouseButtonDown(0) && !_isPlaced && !_timerCountdown.secondsExpired)
         {
             _selected = true;
         }

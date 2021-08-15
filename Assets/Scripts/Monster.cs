@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class Monster : MonoBehaviour
 {
@@ -13,25 +16,96 @@ public class Monster : MonoBehaviour
     private Vector3 _b;
     [SerializeField] private float speed;
 
-    
+    GameManager _gameManager;
+
+    private int _innocentIndex = 0;
+
+    private bool _isGameOver;
     
 
-    private void Update()
+    private void Start()
     {
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        
+        StartCoroutine(MoveCoroutine());
+    }
 
-        foreach (Innocent innocent in Innocent.GetInnocentList())
+    
+    IEnumerator MoveCoroutine()
+    {
+        yield return new WaitForSeconds(3);
+
+        while (true)
         {
-            _a = transform.position;
-            _b = innocent.transform.position;
+            MoveToInnocents();
+            yield return null;
+        }
 
-            if (Vector3.Distance(_a, _b) < range)
+    }
+    
+    
+    private void MoveToInnocents()
+    {
+        
+        
+        if (_innocentIndex <= _gameManager.İnnocentList.Count - 1)
+        {
+            var targetPosition = _gameManager.İnnocentList[_innocentIndex].transform.position;
+            var movementThisFrame = speed * Time.deltaTime;
+            
+            
+            
+            if (Vector3.Distance(transform.position, targetPosition) < range) // If its range.. Go and kill it.
             {
+                transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementThisFrame);
                 
-                 transform.position = Vector3.MoveTowards(_a, _b, speed * Time.deltaTime);
-                 
+                if (transform.position == targetPosition)
+                {
+                    _gameManager.İnnocentList[_innocentIndex].gameObject.SetActive(false);
+                    _innocentIndex++;
+                }
+                
+            }
 
-
+            
+            if (Vector3.Distance(transform.position, targetPosition) > range) // If Out of Range, check for it and go.
+            {
+                _innocentIndex++;
+                
+                if (Vector3.Distance(transform.position, targetPosition) < range)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementThisFrame);
+                }
             }
         }
+        
+        else
+        {
+            bool allActive = true;
+
+            foreach (Innocent obj in _gameManager.İnnocentList)
+            {
+                if (!obj.gameObject.activeSelf)
+                {
+                    allActive = false;
+                    break;
+                }
+            }
+
+            if (allActive) // If you win.
+            {
+                // win screen
+                Debug.Log("You win!");
+            }
+
+            else
+            {
+                Debug.Log("Game is Over");
+            }
+
+        }
+
     }
+    
 }
+
