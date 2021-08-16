@@ -7,6 +7,11 @@ using UnityEngine.Serialization;
 public class LevelManager : MonoBehaviour
 {
 
+
+    [SerializeField] private GameObject hazard;
+    [SerializeField] private Transform hazardSpawn;
+
+    public bool isHazardActive;
     public enum LevelState
     {
         Level1,
@@ -20,11 +25,6 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        
-    }
-
-    private void Update()
-    {
         switch (levelstate)
         {
             case LevelState.Level1:
@@ -33,6 +33,8 @@ public class LevelManager : MonoBehaviour
             
             case LevelState.Level2:
                 // Do things.
+
+                isHazardActive = true;
                 Debug.Log("It's level 2.");
                 break;
             
@@ -50,6 +52,11 @@ public class LevelManager : MonoBehaviour
             
             
         }
+    }
+
+    private void Update()
+    {
+      
         
     }
 

@@ -61,6 +61,11 @@ public class Monster : MonoBehaviour
                 if (transform.position == targetPosition)
                 {
                     _gameManager.İnnocentList[_innocentIndex].gameObject.SetActive(false);
+                    // Sound effect Innocent
+                    if (_gameManager.innocent.gameObject.activeSelf)
+                    {
+                        _gameManager.innocent.GetComponent<AudioSource>().Play();
+                    }
                     _innocentIndex++;
                 }
                 

@@ -8,6 +8,7 @@ TagManager:
   - Target
   - EscapePlatform
   - Monster
+  - Hazard
   layers:
   - Default
   - TransparentFX

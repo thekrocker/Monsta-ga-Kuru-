@@ -9,7 +9,8 @@ public class WinLoseManager : MonoBehaviour
 
     public GameObject winUI;
     public GameObject loseUI;
-
+    
+    private int currentSceneIndex;
     
 
 
@@ -28,19 +29,27 @@ public class WinLoseManager : MonoBehaviour
     
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(0);
     }
-    
     
     
     public void Restart()
     {
-        SceneManager.LoadScene("Level1");
+        currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex);
     }
 
-    public void LoadLevel2()
+    public void LoadNext()
     {
-        SceneManager.LoadScene("Level2");
+         currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex + 1);
+        
+        Debug.Log("clicked");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
     
 }

@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Innocent innocents;
     [SerializeField] private Transform[] innocentSpawnPoints;
 
+    [SerializeField] private GameObject explosionFX;
+
     
     
     
@@ -78,6 +80,8 @@ public class GameManager : MonoBehaviour
 
     private void SpawnMonster()
     {
+        Instantiate(explosionFX, playerSpawnPoint.position, Quaternion.identity);
+        
         _monster = Instantiate(monsterPrefab, playerSpawnPoint.position, Quaternion.identity);
         _monster.GetComponent<Monster>();
     }

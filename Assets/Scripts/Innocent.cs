@@ -22,17 +22,26 @@ public class Innocent : MonoBehaviour
     GameManager _gameManager;
     private TimerCountdown _timerCountdown;
 
-    
-    
+    [SerializeField] private GameObject dragVFX;
+    private GameObject particle;
+
+    private GameObject _hazard;
+
+    public bool triggeredHazard;
+
+    private WinLoseManager _winLoseManager;
+
+    private AudioSource _eatSound;
 
     private void Awake()
     {
         Instance = this;
         
-        
+        _hazard = GameObject.Find("Hazard");
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _timerCountdown = GameObject.Find("CountdownManager").GetComponent<TimerCountdown>();
-        
+        _winLoseManager = GameObject.Find("WinLoseManager").GetComponent<WinLoseManager>();
+
         
         _isInsidePlatform = false;
         
@@ -49,9 +58,24 @@ public class Innocent : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        
         if (other.CompareTag("EscapePlatform"))
         {
             _isInsidePlatform = true;
+        }
+
+        if (other.CompareTag("Hazard") && _hazard != null)
+        {
+            Debug.Log(triggeredHazard);
+            triggeredHazard = true;
+            if (triggeredHazard)
+            {
+                gameObject.SetActive(false);
+                // Sound Effect
+                
+                
+                _winLoseManager.OpenLoseScreen();
+            }
         }
         
         
@@ -68,11 +92,22 @@ public class Innocent : MonoBehaviour
 
     private void Update()
     {
+        
+
 
         if (_selected)
         {
             // transform.position = new Vector2(GetMousePos().x, GetMousePos().y);
             transform.position = GetMousePos() + _dragOffset;
+            if (particle != null)
+            {
+                particle.transform.position = GetMousePos();
+
+            }
+            
+           
+
+            
         }
         
         
@@ -80,6 +115,7 @@ public class Innocent : MonoBehaviour
     }
     private void OnMouseUp()
     {
+        Destroy(particle, 2f);
         if (_isInsidePlatform) // Check if OnTriggerEnter2D is true.
         {
             _isPlaced = true;
@@ -89,7 +125,10 @@ public class Innocent : MonoBehaviour
         else
         {
             _selected = false;
+            
             this.transform.localPosition = new Vector3(_resetPosition.x, _resetPosition.y, _resetPosition.z);
+
+
         }
 
 
@@ -99,13 +138,20 @@ public class Innocent : MonoBehaviour
     private void OnMouseDown()
     {
          _dragOffset = transform.position - GetMousePos();
+         
+
     }
 
     private void OnMouseOver()
     {
+
         if (Input.GetMouseButtonDown(0) && !_isPlaced && !_timerCountdown.secondsExpired)
         {
+            particle = Instantiate(dragVFX, GetMousePos(), Quaternion.identity);
+
             _selected = true;
+            
+
         }
     }
     
